@@ -11,7 +11,7 @@ import Foundation
 import Combine
 
 @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-public class DefaultBaseService: BaseService<DefaultServiceConfiguration>, Requests, RequestComposer {
+open class DefaultBaseService: BaseService<DefaultServiceConfiguration>, Requests, RequestComposer {
 
     
 }

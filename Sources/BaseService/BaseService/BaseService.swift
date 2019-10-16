@@ -9,16 +9,16 @@ import Foundation
 import Combine
 
 @available(OSX 10.15, iOS 13.0, *)
-public class BaseService<T: ServiceConfiguration> {
+open class BaseService<T: ServiceConfiguration> {
     
     // MARK: - Variables
     
-    public var session: URLSession
-    public var configuration: T    
+    open var session: URLSession
+    open var configuration: T
     
     // MARK: - Init 
     
-    public init(session: URLSession = URLSession.shared, configuration: T) {
+    open init(session: URLSession = URLSession.shared, configuration: T) {
         self.session = session
         self.configuration = configuration
     }

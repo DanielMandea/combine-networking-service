@@ -7,15 +7,15 @@
 
 import Foundation
 
-public struct DefaultServiceConfiguration: ServiceConfiguration {
+open struct DefaultServiceConfiguration: ServiceConfiguration {
     
     // MARK - Public
     
-    public var baseUrl: URL
+    open var baseUrl: URL
     
     // MARK: - Init
     
-    public init(baseUrl: URL ) {
+    open init(baseUrl: URL ) {
         self.baseUrl = baseUrl
     }
 }
