@@ -18,7 +18,7 @@ open class BaseService<T: ServiceConfiguration> {
     
     // MARK: - Init 
     
-    open init(session: URLSession = URLSession.shared, configuration: T) {
+    public init(session: URLSession = URLSession.shared, configuration: T) {
         self.session = session
         self.configuration = configuration
     }
