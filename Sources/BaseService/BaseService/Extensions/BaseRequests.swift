@@ -21,8 +21,8 @@ extension Requests where Self: BaseService<DefaultServiceConfiguration>, Self: R
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
     }
-    public func fetch<T: Codable>(with method: HttpMethod, path: String? = nil, object: T? = nil) -> AnyPublisher<T, Error> {
-        let urlRequest = decodableRquest(with: method, path: path, object: object)
+    public func fetch<T: Codable>(with method: HttpMethod, path: String? = nil, object: T? = nil, headers: [String: String]? = nil) -> AnyPublisher<T, Error> {
+        let urlRequest = decodableRquest(with: method, path: path, object: object, headers: headers)
         return fetch(with: urlRequest)
     }
        
@@ -30,7 +30,7 @@ extension Requests where Self: BaseService<DefaultServiceConfiguration>, Self: R
         return fetch(with: .get, path: path)
     }
     
-    public func post<T: Codable>(to path: String? = nil, object: T? = nil) -> AnyPublisher<T, Error> {
-        return fetch(with: .post, path: path, object: object)
+    public func post<T: Codable>(to path: String? = nil, object: T? = nil, headers: [String: String]? = nil) -> AnyPublisher<T, Error> {
+        return fetch(with: .post, path: path, object: object, headers: headers)
     }
 }
