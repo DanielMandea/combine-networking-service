@@ -12,7 +12,11 @@ import Foundation
 extension RequestComposer where Self: BaseService<DefaultServiceConfiguration> {
     public func decodableRquest<T: Codable>(with method: HttpMethod, path: String? = nil, object: T? = nil, headers: [String: String]? = nil) -> URLRequest {
         var urlRequest = request(with: method, path: path, headers: headers)
-        if let object = object { urlRequest.httpBody = try! JSONEncoder().encode(object) }
+        if let object = object {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            urlRequest.httpBody = try! encoder.encode(object)
+        }
         return urlRequest
     }
     
