@@ -12,12 +12,14 @@ import Combine
 extension Requests where Self: BaseService<DefaultServiceConfiguration>, Self: RequestComposer {
     
     public func fetch<T: Codable>(with request: URLRequest) -> AnyPublisher<T, Error> {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
         return taskPublisher(for: request)
             .mapError { $0 as Error }
             .tryMap { output in
                 return try BaseService<DefaultServiceConfiguration>.validate(output.data, output.response)
         }
-        .decode(type: T.self, decoder: JSONDecoder())
+        .decode(type: T.self, decoder: decoder)
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
     }
