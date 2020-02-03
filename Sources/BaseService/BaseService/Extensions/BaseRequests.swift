@@ -23,6 +23,15 @@ extension Requests where Self: BaseService<DefaultServiceConfiguration>, Self: R
         .receive(on: RunLoop.main)
         .eraseToAnyPublisher()
     }
+    public func fetch(with request: URLRequest) -> AnyPublisher<Error> {
+        return taskPublisher(for: request)
+            .mapError { $0 as Error }
+            .tryMap { output in
+                return try BaseService<DefaultServiceConfiguration>.validate(output.data, output.response)
+        }
+        .receive(on: RunLoop.main)
+        .eraseToAnyPublisher()
+    }
     public func fetch<T: Codable>(with method: HttpMethod, path: String? = nil, object: T? = nil, headers: [String: String]? = nil) -> AnyPublisher<T, Error> {
         let urlRequest = decodableRequest(with: method, path: path, object: object, headers: headers)
         return fetch(with: urlRequest)
