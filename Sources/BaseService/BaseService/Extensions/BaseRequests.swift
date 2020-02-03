@@ -24,7 +24,7 @@ extension Requests where Self: BaseService<DefaultServiceConfiguration>, Self: R
         .eraseToAnyPublisher()
     }
     public func fetch<T: Codable>(with method: HttpMethod, path: String? = nil, object: T? = nil, headers: [String: String]? = nil) -> AnyPublisher<T, Error> {
-        let urlRequest = decodableRquest(with: method, path: path, object: object, headers: headers)
+        let urlRequest = decodableRequest(with: method, path: path, object: object, headers: headers)
         return fetch(with: urlRequest)
     }
        
